@@ -1,0 +1,8 @@
+# .gitignore
+
+01-programa
+02-bibliografia
+03-recursos
+# Otros archivos a ignorar
+*.log
+*.tmp
