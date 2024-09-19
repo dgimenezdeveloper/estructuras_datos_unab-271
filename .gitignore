@@ -7,3 +7,4 @@ __pycahe__
 # Otros archivos a ignorar
 *.log
 *.tmp
+*.pyc
