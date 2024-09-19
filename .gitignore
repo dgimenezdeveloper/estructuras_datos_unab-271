@@ -3,8 +3,9 @@
 01-programa
 02-bibliografia
 03-recursos
-__pycahe__
+__pycache__/
 # Otros archivos a ignorar
 *.log
 *.tmp
 *.pyc
+*.zip
