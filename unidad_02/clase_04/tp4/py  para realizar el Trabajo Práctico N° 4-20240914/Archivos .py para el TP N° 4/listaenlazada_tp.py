@@ -13,7 +13,7 @@ class LinkedList:
     def append(self, data):
         new_node = Node(data) 
         if self.is_empty() or self.head.data >= data: 
-            new_node.next = self.head # El nuevo nodo se enlaza con la cabeza de la lista
+            new_node.next = self.head # El puntero next del nuevo nodo apunta hacia donde apuntaba la cabeza de la lista
             self.head = new_node # La cabeza de la lista es el nuevo nodo
         else:
             current = self.head # Se guarda la cabeza de la lista en un nodo auxiliar
