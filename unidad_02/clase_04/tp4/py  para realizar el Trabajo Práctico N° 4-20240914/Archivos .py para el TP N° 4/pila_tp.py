@@ -1,5 +1,5 @@
 """ Analizar  el  código  del  programa    pilas_tp.py    Identificar  la  clase,  los  métodos. 
-Agregar los métdodos: 
+Agregar los métodos: 
 - Eliminar un elemento 
 - Visualizar la pila  como pila """
 
@@ -29,7 +29,7 @@ class Stack:
         else:
             popped_node = self.head
             self.head = self.head.next
-            popped_node.next = None
+            popped_node.next = None 
             return popped_node.data
 
     def peek(self):
@@ -53,14 +53,24 @@ class Stack:
     def eliminar_elemento(self, data):
         if self.is_empty():
             return None
-        elif self.head.data == data:
-            self.head = self.head.next
-        else:
-            current = self.head
-            while current.next is not None and current.next.data != data:
-                current = current.next
-            if current.next is not None:
-                current.next = current.next.next
+        
+        aux_stack = Stack()
+        found = False
+
+        # Transferir elementos a una pila auxiliar
+        while not self.is_empty():
+            top_element = self.pop()
+            if top_element == data:
+                found = True
+            else:
+                aux_stack.push(top_element)
+
+        # Transferir elementos de la pila auxiliar a la pila original
+        while not aux_stack.is_empty():
+            self.push(aux_stack.pop())
+
+        return found
+
     ########################################
     
     
