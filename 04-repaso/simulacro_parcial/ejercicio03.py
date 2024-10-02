@@ -53,5 +53,5 @@ arbol.agregar_ordenado(10)
 arbol.agregar_ordenado(12)
 arbol.agregar_ordenado(84)
 arbol.agregar_ordenado(86)
-#arbol.imprimir()
+arbol.imprimir()
 print(arbol.contar_pares()) # 4

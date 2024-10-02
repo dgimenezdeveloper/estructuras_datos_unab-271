@@ -6,7 +6,12 @@ def contar_nodos(raiz):
     if(raiz is None):
         return 0
     else:
-        return 1 + contar_nodos(raiz.izquierda) + contar_nodos(raiz.derecha)
+        contador = 1
+        contador += contar_nodos(raiz.hijo_izquierdo)
+        contador += contar_nodos(raiz.hijo_derecho)
+        return contador
+
+
 
 arbol_binario = insertar_nodo(None, 45)
 arbol_binario  = insertar_nodo(arbol_binario , 11)
