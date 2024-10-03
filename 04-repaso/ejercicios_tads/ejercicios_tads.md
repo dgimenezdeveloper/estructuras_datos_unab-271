@@ -64,9 +64,3 @@ Cancelar la inscripción de un estudiante en un curso.
 Modificar el profesor de un curso.
 Consultar los estudiantes inscritos en un curso.
 Generar un informe de todos los cursos y los estudiantes inscritos en cada uno.
-Instrucciones:
-Para cada ejercicio, deberás implementar las clases que representen los objetos mencionados (Ej. Empleado, Proyecto, etc.), y los métodos que permitan realizar las operaciones descritas (Ej. agregar, eliminar, modificar, consultar e informar).
-
-Estos ejercicios te permitirán practicar conceptos de encapsulamiento, abstracción y manipulación de datos en estructuras más complejas, como en el ejercicio inicial que mencionaste.
-
-¡Buena práctica! Si necesitas alguna ayuda con las implementaciones, no dudes en preguntar.
