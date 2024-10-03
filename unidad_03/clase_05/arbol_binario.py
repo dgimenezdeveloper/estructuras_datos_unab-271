@@ -14,7 +14,80 @@ def insertar(arbol, elemento):
         arbol.derecha = insertar(arbol.derecha, elemento)
     return arbol
 
+##################################################################
+def buscar(arbol, elemento):
+    if arbol is None:
+        return False
+    elif arbol.elemento == elemento:
+        return True
+    elif arbol.esMenor(elemento, arbol.elemento):
+        return buscar(arbol.izquierda, elemento)
+    else:
+        return buscar(arbol.derecha, elemento)
 
+def contar_nodos(arbol):
+    if arbol is None:
+        return 0
+    return 1 + contar_nodos(arbol.izquierda) + contar_nodos(arbol.derecha)
+
+def sumar_nodos(arbol):
+    if arbol is None:
+        return 0
+    return arbol.elemento + sumar_nodos(arbol.izquierda) + sumar_nodos(arbol.derecha)
+
+def contar_pares(arbol):
+    if arbol is None:
+        return 0
+    if arbol.elemento % 2 == 0:
+        return 1 + contar_pares(arbol.izquierda) + contar_pares(arbol.derecha)
+    else:
+        return contar_pares(arbol.izquierda) + contar_pares(arbol.derecha)
+
+def sumar_pares(arbol):
+    if arbol is None:
+        return 0
+    if arbol.elemento % 2 == 0:
+        return arbol.elemento + sumar_pares(arbol.izquierda) + sumar_pares(arbol.derecha)
+    else:
+        return sumar_pares(arbol.izquierda) + sumar_pares(arbol.derecha)
+    
+def contar_impares(arbol):
+    if arbol is None:
+        return 0
+    if arbol.elemento % 2 != 0:
+        return 1 + contar_impares(arbol.izquierda) + contar_impares(arbol.derecha)
+    else:
+        return contar_impares(arbol.izquierda) + contar_impares(arbol.derecha)
+    
+##################################################################
+
+def recorrer_preorden(arbol):
+    if arbol is not None:
+        print(arbol.elemento)
+        recorrer_preorden(arbol.izquierda)
+        recorrer_preorden(arbol.derecha)
+
+def recorrer_inorden(arbol):
+    if arbol is not None:
+        recorrer_inorden(arbol.izquierda)
+        print(arbol.elemento)
+        recorrer_inorden(arbol.derecha)
+
+def recorrer_postorden(arbol):
+    if arbol is not None:
+        recorrer_postorden(arbol.izquierda)
+        recorrer_postorden(arbol.derecha)
+        print(arbol.elemento)
+
+def buscar(arbol , elemento):
+    if arbol is None:
+        return False
+    elif arbol.elemento == elemento:
+        return True
+    elif arbol.esMenor(elemento, arbol.elemento):
+        return buscar(arbol.izquierda, elemento)
+    else:
+        return buscar(arbol.derecha, elemento)
 
 def imprimir_arbol_grafico(arbol, espacio=0, nivel=0, separacion=4):
     if arbol is None:
@@ -51,11 +124,12 @@ arbol = insertar(None, 45)
 arbol = insertar(arbol, 11)
 arbol = insertar(arbol, 85)
 arbol = insertar(arbol, 5)
-arbol = insertar(arbol, 20)
-arbol = insertar(arbol, 70)
+arbol = insertar(arbol, 21)
+arbol = insertar(arbol, 71)
 arbol = insertar(arbol, 100)
 arbol = insertar(arbol, 1)
 
 imprimir_arbol_grafico(arbol)
 print('#'*100)
-imprimir_arbol(arbol)
+print(contar_pares(arbol))
+print(sumar_nodos(arbol))

@@ -7,33 +7,33 @@ def por_nivel(raiz):
 	push(pendientes,raiz)
 	while(not cola_vacia(pendientes)):
 		nodo = pop(pendientes)
-		print(nodo.informacion)
-		if(nodo.izquierda is not None):
-			push(pendientes,nodo.izquierda)
-		if(nodo.derecha is not None):
-			push(pendientes,nodo.derecha)
+		print(nodo.info)
+		if(nodo.izq is not None):
+			push(pendientes,nodo.izq)
+		if(nodo.der is not None):
+			push(pendientes,nodo.der)
 
 def inorden(raiz):
 	#realiza el recorrido en orden del arbol
 	if(raiz is not None):
-		inorden(raiz.izquierda)
-		print(raiz.informacion)
-		inorden(raiz.derecha)
+		inorden(raiz.izq)
+		print(raiz.info)
+		inorden(raiz.der)
 		
 def preorden(raiz):
 	#realiza el recorrido preorden del arbol
 	if(raiz is not None):
-		print(raiz.informacion)
-		preorden(raiz.izquierda)
-		preorden(raiz.derecha)
+		print(raiz.info)
+		preorden(raiz.izq)
+		preorden(raiz.der)
 		
 		
 def postorden(raiz):
 	#realiza el recorrido postorden del arbol
 	if(raiz is not None):
-		postorden(raiz.derecha)
-		print(raiz.informacion)
-		postorden(raiz.izquierda)
+		postorden(raiz.der)
+		print(raiz.info)
+		postorden(raiz.izq)
 
 arbol_binario = insertar_nodo(None, 45)
 arbol_binario  = insertar_nodo(arbol_binario , 11)
