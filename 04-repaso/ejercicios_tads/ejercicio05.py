@@ -54,7 +54,7 @@ class Escuela:
     def informe_cursos(self):
         for curso in self.cursos:
             print(f"Curso: {curso.nombre}")
-            if curso in self.cursos:
+            if curso.estudiantes_inscritos:
                 for estudiante in curso.estudiantes_inscritos:
                     print(f"  - {estudiante.nombre} {estudiante.apellido}")
             else:

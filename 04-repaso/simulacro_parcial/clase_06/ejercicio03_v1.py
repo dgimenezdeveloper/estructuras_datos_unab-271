@@ -14,14 +14,12 @@ class Nodo:
         
     def contar_nodos_pares(self):
         if self is None:
-            return 0
-            
+            return 0      
         # contamos los nodos pares del subarbol izq
         if self.izq is None:
             cant_izq = 0
         else:    
             cant_izq = self.izq.contar_nodos_pares()
-     
         
         if self.valor % 2 == 0:
             cant = 1
