@@ -58,7 +58,55 @@ def contar_impares(arbol):
         return 1 + contar_impares(arbol.izquierda) + contar_impares(arbol.derecha)
     else:
         return contar_impares(arbol.izquierda) + contar_impares(arbol.derecha)
-    
+
+def contar_mayores(arbol, valor):
+    if arbol is None:
+        return 0
+    if arbol.elemento > valor:
+        return 1 + contar_mayores(arbol.izquierda, valor) + contar_mayores(arbol.derecha, valor)
+    else:
+        return contar_mayores(arbol.izquierda, valor) + contar_mayores(arbol.derecha, valor)
+
+def sumar_rango(arbol, min, max):
+    if arbol is None:
+        return 0
+    if min <= arbol.elemento <= max:
+        return arbol.elemento + sumar_rango(arbol.izquierda, min, max) + sumar_rango(arbol.derecha, min, max)
+    else:
+        return sumar_rango(arbol.izquierda, min, max) + sumar_rango(arbol.derecha, min, max)
+
+def es_primo(n):
+    if n %2 == 0:
+        if n == 2:
+            return True
+        else:
+            return False
+    else:
+        for i in range(3, n, 2):
+            if n % i == 0:
+                return False
+        return True
+
+def contar_primos(arbol):
+    if arbol is None:
+        return 0
+    if es_primo(arbol.elemento):
+        return 1 + contar_primos(arbol.izquierda) + contar_primos(arbol.derecha)
+    else:
+        return contar_primos(arbol.izquierda) + contar_primos(arbol.derecha)
+
+def maximo(arbol):
+    if arbol.derecha is None:
+        return arbol.elemento
+    return maximo(arbol.derecha)
+
+def contar_multiplos(arbol, num):
+    if arbol is None:
+        return 0
+    if arbol.elemento % num == 0:
+        return 1 + contar_multiplos(arbol.izquierda, num) + contar_multiplos(arbol.derecha, num)
+    else:
+        return contar_multiplos(arbol.izquierda, num) + contar_multiplos(arbol.derecha, num)
 ##################################################################
 
 def recorrer_preorden(arbol):
