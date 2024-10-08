@@ -1,0 +1,180 @@
+Ejercicio 1: Criaturas Mágicas y Magos (TADs)
+
+Enunciado
+
+En el universo mágico, los magos y brujas pueden criar criaturas mágicas. Para este ejercicio deberá
+implementar dos clases en Python: CriaturaMagica y Mago.
+
+Clases a Implementar
+
+1. Clase CriaturaMagica:
+
+• Atributos:
+
+• nombre: (str) Nombre de la criatura.
+
+• tipo: (str) Tipo de criatura mágica (por ejemplo, Fénix, Hipogrifo, Thestral).
+ 
+• nivel_magico: (int) Nivel de magia de la criatura (debe estar entre 1 y 100).
+
+• Métodos:
+
+• __init__ (): Constructor que inicializa los atributos de la criatura.
+
+• aumentar_nivel(): Método que incrementa el nivel mágico de la criatura en 1, siempre que no supere el nivel 100.
+
+• __str__(): Método que devuelve una representación en cadena de la criatura en el formato: "Criatura: [Nombre], Tipo: [Tipo], Nivel Mágico: [Nivel]".
+
+
+2. Clase Mago:
+
+• Atributos:
+
+• nombre: (str) Nombre del mago o bruja.
+
+• criaturas: (lista) Lista que contiene instancias de la clase CriaturaMagica
+
+
+• Métodos:
+
+• __init__(): Constructor que inicializa el nombre del mago y crea una lista vacía para las criaturas mágicas.
+
+• agregar_criatura(): Método que agrega una criatura al grupo. Si ya hay 6 criaturas en el grupo, debe mostrar un mensaje indicando que no se pueden tener más criaturas.
+
+• mostrar_criaturas(): Método que imprime todas las criaturas del grupo utilizando el método __str_ de la clase CriaturaMagica.
+
+• nivel_magico_promedio(): Método que calcula y devuelve el nivel promedio de magia de las criaturas en el grupo. Si no hay criaturas, debe devolver 0.
+
+
+*************************************************************************************
+
+Ejercicio 2: Estudios en las Escuelas Mágicas (Colas)
+
+Enunciado
+
+En las escuelas mágicas como Hogwarts, Beauxbatons o Durmstrang, los estudiantes deben inscribirse
+para diversas clases de magia. Estos procesos de inscripción siguen un sistema de colas (filas), donde los
+estudiantes se registran en el orden en que llegan.
+
+Contexto
+Deberá implementar un sistema de inscripción a las clases, usando una cola para gestionar a los
+estudiantes que están esperando para asistir a una clase específica. Una vez que la clase esté llena, los
+estudiantes en la fila deben ser notificados de que no hay más espacio.
+
+
+Clases a Implementar
+
+1. Clase Estudiante:
+
+• Atributos:
+
+• nombre: (str) Nombre del estudiante.
+• casa: (str) Casa a la que pertenece (Gryffindor, Slytherin, Hufflepuff o Ravenclaw).
+
+• Métodos:
+
+• __init__(self, nombre: str, casa: str): Constructor que inicializa el nombre del estudiante y su casa.
+• __str__(): Método que devuelve una representación en cadena del estudiante en el formato: "Estudiante: (Nombre], Casa: [Casa]"
+
+2. Clase ColaInscripcion:
+
+• Atributos:
+
+• inscriptos: (lista) Lista enlazada que actúa como la cola para gestionar a los
+estudiantes en orden de inscripción.
+• capacidad: (int) Capacidad máxima de estudiantes por clase.
+
+• Métodos:
+
+•__init__(self, capacidad: int): Constructor que inicializa una lista vacía para los
+estudiantes y establece la capacidad máxima de la clase.
+
+• inscribir_estudiante(self, estudiante: Estudiante): Método que agrega un
+estudiante a la cola. Si la clase está llena, debe mostrar un mensaje indicando que no
+hay más cupos.
+
+• mostrar_inscriptos(self): Método que imprime la lista de estudiantes inscritos en
+el orden en que llegaron.
+
+• remover_estudiante(self): Método que elimina y devuelve el primer estudiante de
+la cola (el siguiente en ingresar a clase).
+
+
+*************************************************************************************
+
+Ejercicio 3: Criaturas en el Bosque Prohibido (Recursividad)
+
+Enunciado
+
+Los magos a menudo deben aventurarse en el Bosque Prohibido para localizar criaturas mágicas. 
+Para este ejercicio, debe implementar una función recursiva que simule la búsqueda de una
+criatura mágica específica en un árbol de criaturas mágicas.
+
+Contexto
+Suponga que tiene un árbol binario donde cada nodo representa una criatura mágica. Cada nodo tiene un
+nombre y puede tener hasta dos hijos (uno a la izquierda y otro a la derecha). 
+La búsqueda de una criatura específica se puede realizar de manera recursiva verificando
+si la criatura se encuentra en el nodo actual o en uno de sus subárboles.
+
+
+Clases a Implementar
+
+1. Clase NodoCriatura:
+
+• Atributos:
+
+• nombre: (str) Nombre de la criatura.
+• izquierda: (NodoCriatura) Hijo izquierdo (puede ser None).
+• derecha: (NodoCriatura) Hijo derecho (puede ser None).
+
+• Métodos:
+
+•__init__ (self, nombre: str): Constructor que inicializa el nombre de la criatura y
+establece los hijos izquierdo y derecho como None.
+
+2. Función Recursiva buscar_criatura:
+
+• Parámetros:
+
+• nodo: (NodoCriatura) Nodo actual del árbol donde se realiza la búsqueda.
+• nombre_criatura: (str) Nombre de la criatura mágica que se busca.
+
+• Retorno:
+
+• Devuelve True si la criatura es encontrada en el árbol, y False si no se encuentra.
+
+• Lógica:
+
+• Si el nodo actual es None, devuelve False.
+• Si el nombre del nodo actual coincide con nombre_criatura, devuelve True.
+• Llama recursivamente a sí misma para buscar en el hijo izquierdo y luego en el hijo
+derecho.
+
+*************************************************************************************
+
+Ejercicio 4: Diseño Teórico de un Torneo Mágico
+
+Enunciado
+
+Imagine que debe desarrollar un juego basado en el Torneo de los Tres Magos, pero extendido para incluir
+varias escuelas mágicas. Este juego incluirá elementos como la selección de campeones, las pruebas del
+torneo, el sistema de puntuación y los desafíos mágicos. Para cada uno de estos componentes, deberá
+explicar qué estructuras de datos utilizaría y por qué, considerando la eficiencia y eficacia en cada caso.
+Recuerde que este es un ejercicio de desarrollo explicativo teórico, no de codificación (tal y como lo
+hablamos en clase).
+
+Componentes mínimos del juego a considerar
+
+1. Selección de Campeones
+2. Pruebas del Torneo
+3. Sistema de Puntuación
+4. Mapa del Torneo
+5. Desafíos Mágicos
+
+Consideraciones Finales
+
+Al diseñar este juego, es fundamental considerar no solo la estructura de datos más adecuada para cada
+componente, sino también cómo estas estructuras interactúan entre sí. La elección de estructuras
+eficientes no solo mejora el rendimiento del juego, sino que también proporciona una mejor experiencia
+al jugador al permitir interacciones fluidas y rápidas.
+

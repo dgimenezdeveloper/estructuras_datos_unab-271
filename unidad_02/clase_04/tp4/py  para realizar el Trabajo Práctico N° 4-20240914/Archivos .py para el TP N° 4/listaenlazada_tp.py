@@ -17,7 +17,7 @@ class LinkedList:
             self.head = new_node # La cabeza de la lista es el nuevo nodo
         else:
             current = self.head # Se guarda la cabeza de la lista en un nodo auxiliar
-            while current.next is not None and current.next.data < data: 
+            while current.next is not None and current.next.data < data: # SI el nodo siguiente al nodo actual no es None y el dato del nodo siguiente es menor al dato a insertar
                 current = current.next # Se recorre la lista hasta encontrar el lugar donde se debe insertar el nuevo nodo
             new_node.next = current.next # El nuevo nodo se enlaza con el nodo siguiente al nodo actual
             current.next = new_node # El nodo actual se enlaza con el nuevo nodo
