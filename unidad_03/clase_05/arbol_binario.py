@@ -107,6 +107,35 @@ def contar_multiplos(arbol, num):
         return 1 + contar_multiplos(arbol.izquierda, num) + contar_multiplos(arbol.derecha, num)
     else:
         return contar_multiplos(arbol.izquierda, num) + contar_multiplos(arbol.derecha, num)
+
+def imprimir_nodos_pares_inorden(arbol):
+    if arbol is not None:
+        imprimir_nodos_pares_inorden(arbol.izquierda)
+        if arbol.elemento % 2 == 0:
+            print(arbol.elemento)
+        imprimir_nodos_pares_inorden(arbol.derecha)
+    
+def imprimir_nodos_pares_preorden(arbol):
+    if arbol is not None:
+        if arbol.elemento % 2 == 0:
+            print(arbol.elemento)
+        imprimir_nodos_pares_preorden(arbol.izquierda)
+        imprimir_nodos_pares_preorden(arbol.derecha)
+
+def imprimir_nodos_pares_postorden(arbol):
+    if arbol is not None:
+        imprimir_nodos_pares_postorden(arbol.izquierda)
+        imprimir_nodos_pares_postorden(arbol.derecha)
+        if arbol.elemento % 2 == 0:
+            print(arbol.elemento)
+
+def contar_pares(raiz):
+    if raiz is None:
+        return 0
+    if raiz.elemento % 2 == 0:
+        return 1 + contar_pares(raiz.izquierda) + contar_pares(raiz.derecha)
+    else:
+        return contar_pares(raiz.izquierda) + contar_pares(raiz.derecha)
 ##################################################################
 
 def recorrer_preorden(arbol):
@@ -181,3 +210,4 @@ imprimir_arbol_grafico(arbol)
 print('#'*100)
 print(contar_pares(arbol))
 print(sumar_nodos(arbol))
+print(imprimir_nodos_pares_inorden(arbol))
