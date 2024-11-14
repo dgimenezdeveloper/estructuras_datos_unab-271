@@ -54,6 +54,47 @@ class Paciente:
         """
         self.medicamentos.append(medicamento)
 
+#  UNIDAD 2 - ALGORITMO RECURSIVO
+    def buscar_en_historial(self, clave):
+        """
+        Función recursiva para buscar una enfermedad o medicamento clave en el historial de tratamientos de un paciente.
+        - Args
+            * clave (str): Enfermedad o medicamento clave a buscar.
+            
+        :return: True si se encuentra la clave, False en caso contrario.
+        """
+        try:
+            return self._buscar_en_historial_recursivo(self.historial_enfermedades + self.medicamentos, clave)
+        except Exception as e:
+            print(f"Error al buscar en el historial: {e}")
+            return False
+
+    def _buscar_en_historial_recursivo(self, historial, clave):
+        """
+        Función auxiliar recursiva para buscar una enfermedad o medicamento clave en el historial.
+        . Args
+            * historial (list): Lista de enfermedades y medicamentos del paciente.
+            * clave (str): Enfermedad o medicamento clave a buscar.
+            
+        :return: True si se encuentra la clave, False en caso contrario.
+        """
+        try:
+            # Caso base: si el historial está vacío, no se encontró la clave
+            if not historial:
+                return False
+            
+            # Verificar si la clave está en el tratamiento actual
+            tratamiento_actual = historial[0]
+            if tratamiento_actual == clave:
+                return True
+            
+            # Llamada recursiva con el resto del historial
+            return self._buscar_en_historial_recursivo(historial[1:], clave)
+        except Exception as e:
+            print(f"Error en la búsqueda recursiva: {e}")
+            return False
+    
+    
     def __str__(self):
         """
         Devuelve una representación en cadena del paciente.
@@ -175,28 +216,50 @@ class GestionPacientes:
             resultado.append(f"Id paciente: {id_paciente}\n {paciente}")
         return "\n".join(resultado)
 
-if __name__  == "__main__":
-    # Crear un paciente
+if __name__ == "__main__":
+    # Crear pacientes
     paciente1 = Paciente("Juan", "1990-01-01", ["Gripe", "Fiebre"], ["Paracetamol", "Ibuprofeno"])
-    print(paciente1)
+    paciente2 = Paciente("Ana", "1985-05-10", ["Covid-19", "Asma"], ["Remdesivir", "Salbutamol"])
+    paciente3 = Paciente("Luis", "1975-03-22", ["Diabetes", "Hipertensión"], ["Insulina", "Lisinopril"])
+    paciente4 = Paciente("Maria", "2000-07-15", ["Alergia", "Migraña"], ["Loratadina", "Sumatriptán"])
 
     # Crear una colección de pacientes
     gestion_pacientes = GestionPacientes()
     gestion_pacientes.agregar_paciente(1, paciente1)
+    gestion_pacientes.agregar_paciente(2, paciente2)
+    gestion_pacientes.agregar_paciente(3, paciente3)
+    gestion_pacientes.agregar_paciente(4, paciente4)
+
+    # Mostrar la colección de pacientes
+    print("Colección de pacientes:")
     print(gestion_pacientes)
 
-    # Obtener un paciente
-    paciente = gestion_pacientes.obtener_paciente(1)
+    # Obtener y mostrar un paciente
+    print("\nObtener paciente con ID 2:")
+    paciente = gestion_pacientes.obtener_paciente(2)
     print(paciente)
 
     # Actualizar un paciente
-    gestion_pacientes.actualizar_paciente(1, nombre="Juan Pérez", fecha_nac="1990-01-01", historial_enfermedades=["Gripe", "Fiebre", "Resfriado"], medicamentos=["Paracetamol", "Ibuprofeno", "Aspirina"])
-    paciente = gestion_pacientes.obtener_paciente(1)
+    print("\nActualizar paciente con ID 3:")
+    gestion_pacientes.actualizar_paciente(3, nombre="Luis Pérez", historial_enfermedades=["Diabetes", "Hipertensión", "Colesterol"], medicamentos=["Insulina", "Lisinopril", "Atorvastatina"])
+    paciente = gestion_pacientes.obtener_paciente(3)
     print(paciente)
 
     # Eliminar un paciente
+    print("\nEliminar paciente con ID 1:")
     gestion_pacientes.eliminar_paciente(1)
-    
-    paciente2 = Paciente("Ana", "1985-05-10", ["Gripe", "Fiebre"], ["Paracetamol", "Ibuprofeno"])
-    gestion_pacientes.agregar_paciente(2, paciente2)
     print(gestion_pacientes)
+
+    # Probar la función de búsqueda recursiva
+    print("\nBuscar 'Insulina' en el historial del paciente con ID 3:")
+    encontrado = paciente.buscar_en_historial("Insulina")
+    print(f"¿Se encontró 'Insulina'? {'Sí' if encontrado else 'No'}")
+
+    print("\nBuscar 'Covid-19' en el historial del paciente con ID 4:")
+    encontrado = gestion_pacientes.obtener_paciente(4).buscar_en_historial("Covid-19")
+    print(f"¿Se encontró 'Covid-19'? {'Sí' if encontrado else 'No'}")
+
+    print("\nBuscar 'Migraña' en el historial del paciente con ID 4:")
+    encontrado = gestion_pacientes.obtener_paciente(4).buscar_en_historial("Migraña")
+    print(f"¿Se encontró 'Migraña'? {'Sí' if encontrado else 'No'}")
+

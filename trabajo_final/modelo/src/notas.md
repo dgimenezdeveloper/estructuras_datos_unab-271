@@ -33,6 +33,18 @@ Usar una cadena de texto en el formato "YYYY-MM-DD" para representar la fecha de
 ### Interoperabilidad:
 - Las cadenas en formato "YYYY-MM-DD" son fácilmente intercambiables entre diferentes sistemas y lenguajes de programación, lo que facilita la integración con APIs y bases de datos.
 
+### buscar_en_historial():
+#### Análisis Algorítmico
+- Complejidad Temporal: La complejidad temporal de la función recursiva es O(n), donde n es el número total de elementos en el historial de enfermedades y medicamentos. Esto se debe a que en el peor de los casos, la función debe recorrer todos los elementos para encontrar la clave o determinar que no está presente.
+
+- Complejidad Espacial: La complejidad espacial también es O(n) debido a la pila de llamadas recursivas. Cada llamada recursiva agrega un nuevo marco a la pila, lo que puede ser un problema para listas muy largas debido a la limitación de profundidad de recursión en Python.
+
+#### Consideraciones para Grandes Volúmenes de Datos
+- Eficiencia: Aunque la recursión proporciona una solución clara y concisa, para grandes volúmenes de datos, una implementación iterativa podría ser más eficiente en términos de uso de memoria, ya que evita el crecimiento de la pila de llamadas.
+- Legibilidad: La recursión es fácil de entender y seguir, lo que puede ser beneficioso para el mantenimiento del código.
+- Optimización: Si se espera que el historial de tratamientos crezca significativamente, se podría considerar optimizar la búsqueda utilizando estructuras de datos más eficientes como conjuntos (sets) o diccionarios (hash maps) que ofrecen una búsqueda en tiempo constante O(1).
+- Es una práctica común en programación separar la lógica recursiva en una función auxiliar privada para mantener la interfaz pública limpia y fácil de usar. 
+
 # Clase GestionPacientes:
 
 Para la gestión de pacientes, donde las operaciones más habituales son buscar y actualizar pacientes, es preferible usar un diccionario. Los diccionarios en Python permiten acceder a los elementos en tiempo constante promedio (O(1)), lo que hace que las operaciones de búsqueda y actualización sean muy eficientes.
