@@ -33,18 +33,6 @@ Usar una cadena de texto en el formato "YYYY-MM-DD" para representar la fecha de
 ### Interoperabilidad:
 - Las cadenas en formato "YYYY-MM-DD" son fácilmente intercambiables entre diferentes sistemas y lenguajes de programación, lo que facilita la integración con APIs y bases de datos.
 
-### buscar_en_historial():
-#### Análisis Algorítmico
-- Complejidad Temporal: La complejidad temporal de la función recursiva es O(n), donde n es el número total de elementos en el historial de enfermedades y medicamentos. Esto se debe a que en el peor de los casos, la función debe recorrer todos los elementos para encontrar la clave o determinar que no está presente.
-
-- Complejidad Espacial: La complejidad espacial también es O(n) debido a la pila de llamadas recursivas. Cada llamada recursiva agrega un nuevo marco a la pila, lo que puede ser un problema para listas muy largas debido a la limitación de profundidad de recursión en Python.
-
-#### Consideraciones para Grandes Volúmenes de Datos
-- Eficiencia: Aunque la recursión proporciona una solución clara y concisa, para grandes volúmenes de datos, una implementación iterativa podría ser más eficiente en términos de uso de memoria, ya que evita el crecimiento de la pila de llamadas.
-- Legibilidad: La recursión es fácil de entender y seguir, lo que puede ser beneficioso para el mantenimiento del código.
-- Optimización: Si se espera que el historial de tratamientos crezca significativamente, se podría considerar optimizar la búsqueda utilizando estructuras de datos más eficientes como conjuntos (sets) o diccionarios (hash maps) que ofrecen una búsqueda en tiempo constante O(1).
-- Es una práctica común en programación separar la lógica recursiva en una función auxiliar privada para mantener la interfaz pública limpia y fácil de usar. 
-
 # Clase GestionPacientes:
 
 Para la gestión de pacientes, donde las operaciones más habituales son buscar y actualizar pacientes, es preferible usar un diccionario. Los diccionarios en Python permiten acceder a los elementos en tiempo constante promedio (O(1)), lo que hace que las operaciones de búsqueda y actualización sean muy eficientes.
@@ -61,3 +49,35 @@ Para la gestión de pacientes, donde las operaciones más habituales son buscar 
 
 ### Legibilidad:
 - El código es más legible y fácil de entender cuando se usan diccionarios para asociar claves únicas con valores.
+
+# UNIDAD 2 ESTRUCTURAS RECURSIVAS
+### buscar_en_historial():
+#### Análisis Algorítmico
+- Complejidad Temporal: La complejidad temporal de la función recursiva es O(n), donde n es el número total de elementos en el historial de enfermedades y medicamentos. Esto se debe a que en el peor de los casos, la función debe recorrer todos los elementos para encontrar la clave o determinar que no está presente.
+
+- Complejidad Espacial: La complejidad espacial también es O(n) debido a la pila de llamadas recursivas. Cada llamada recursiva agrega un nuevo marco a la pila, lo que puede ser un problema para listas muy largas debido a la limitación de profundidad de recursión en Python.
+
+#### Consideraciones para Grandes Volúmenes de Datos
+- Eficiencia: Aunque la recursión proporciona una solución clara y concisa, para grandes volúmenes de datos, una implementación iterativa podría ser más eficiente en términos de uso de memoria, ya que evita el crecimiento de la pila de llamadas.
+- Legibilidad: La recursión es fácil de entender y seguir, lo que puede ser beneficioso para el mantenimiento del código.
+- Optimización: Si se espera que el historial de tratamientos crezca significativamente, se podría considerar optimizar la búsqueda utilizando estructuras de datos más eficientes como conjuntos (sets) o diccionarios (hash maps) que ofrecen una búsqueda en tiempo constante O(1).
+- Es una práctica común en programación separar la lógica recursiva en una función auxiliar privada para mantener la interfaz pública limpia y fácil de usar. 
+
+
+
+# UNIDAD 3 ABB
+Análisis Algorítmico
+Complejidad Temporal:
+
+Inserción: O(log n) en promedio, O(n) en el peor de los casos (árbol desbalanceado).
+Búsqueda: O(log n) en promedio, O(n) en el peor de los casos.
+Eliminación: O(log n) en promedio, O(n) en el peor de los casos.
+Complejidad Espacial:
+
+El espacio requerido es O(n), donde n es el número de nodos en el árbol.
+Ventajas del Árbol Binario de Búsqueda
+Eficiencia: Permite realizar operaciones de inserción, búsqueda y eliminación de manera eficiente, especialmente en árboles balanceados.
+Organización: Mantiene los datos ordenados, lo que facilita la búsqueda de elementos específicos.
+Escalabilidad: Es adecuado para manejar grandes volúmenes de datos debido a su complejidad logarítmica en operaciones comunes.
+Comparación con la Clase GestionPacientes
+La clase GestionPacientes utiliza un diccionario para almacenar los pacientes, lo cual ofrece una búsqueda en tiempo constante O(1). Sin embargo, un árbol binario de búsqueda es útil en situaciones donde se requiere mantener los datos ordenados y realizar operaciones de rango (por ejemplo, encontrar todos los pacientes con IDs en un cierto rango).
