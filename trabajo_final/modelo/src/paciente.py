@@ -6,17 +6,19 @@ class Paciente:
     Clase que representa a un paciente.
     """
 
-    def __init__(self, nombre, fecha_nac, historial_enfermedades=None, medicamentos=None):
+    def __init__(self, id, nombre, fecha_nac, historial_enfermedades=None, medicamentos=None):
         """
         Inicializa una nueva instancia de la clase Paciente.
 
         - Args:
+            * Id (int): Identificador único del paciente.
             * nombre (str): Nombre del paciente .
             * fecha_nac (str): Fecha de nacimiento del paciente en formato "YYYY-MM-DD".
             * edad (int): Edad del paciente.
             * historial_enfermedades (list, opcional): Lista de enfermedades del paciente. Por defecto es una lista vacía.
             * medicamentos (list, opcional): Lista de medicamentos del paciente. Por defecto es una lista vacía.
         """
+        self.id = id
         self.nombre = nombre
         self.fecha_nac = datetime.strptime(fecha_nac, "%Y-%m-%d")  # Convierte la cadena a datetime
         self.edad = self.calcular_edad()
@@ -36,25 +38,6 @@ class Paciente:
             edad -= 1
         return edad
 
-    def agregar_enfermedad(self, enfermedad):
-        """
-        Agrega una enfermedad al historial de enfermedades del paciente.
-
-        - Args:
-            * enfermedad (str):  La enfermedad a agregar.
-        """
-        self.historial_enfermedades.append(enfermedad)
-
-    def agregar_medicamento(self, medicamento):
-        """
-        Agrega un medicamento a la lista de medicamentos del paciente.
-
-        - Args:
-            * medicamento (str): El medicamento a agregar.
-        """
-        self.medicamentos.append(medicamento)
-
-#  UNIDAD 2 - ALGORITMO RECURSIVO
     def buscar_en_historial(self, clave):
         """
         Función recursiva para buscar una enfermedad o medicamento clave en el historial de tratamientos de un paciente.
@@ -93,7 +76,18 @@ class Paciente:
         except Exception as e:
             print(f"Error en la búsqueda recursiva: {e}")
             return False
-    
+
+    def __lt__(self, otro):
+        """
+        Compara dos objetos Paciente basándose en su ID.
+
+        - Args:
+            * otro (Paciente): Otro objeto Paciente a comparar.
+
+        - Retorna:
+            * (bool): True si el ID del paciente es menor que el ID del otro paciente, False en caso contrario.
+        """
+        return self.id < otro.id
     
     def __str__(self):
         """
@@ -102,7 +96,8 @@ class Paciente:
         - Retorna:
             * (str): Una cadena que representa al paciente.
         """
-        return f"Nombre Paciente: {self.nombre}\n Edad: {self.edad}\n Enfermedades: {self.historial_enfermedades}\n Medicamentos: {self.medicamentos}."
+        return f"Nombre Paciente: {self.nombre}\nEdad: {self.edad}\nEnfermedades: {self.historial_enfermedades}\nMedicamentos: {self.medicamentos}"
+
 
 class GestionPacientes:
     """
@@ -118,47 +113,46 @@ class GestionPacientes:
         """
         self.pacientes = {}
 
-    def agregar_paciente(self, id_paciente, paciente):
+    def agregar_paciente(self, paciente):
         """
         Agrega un nuevo paciente a la colección.
 
         - Args:
-            * id_paciente (str): ID único del paciente.
             * paciente (Paciente): Instancia de la clase Paciente a agregar.
 
         - Raises:
             * ValueError: Si el paciente con el ID dado ya existe.
         """
         try:
-            if id_paciente in self.pacientes:
-                raise ValueError(f"El paciente con ID {id_paciente} ya existe.")
-            self.pacientes[id_paciente] = paciente
+            if paciente.id in self.pacientes:
+                raise ValueError(f"El paciente con ID {paciente.id} ya existe.")
+            self.pacientes[paciente.id] = paciente
         except ValueError as e:
             print(e)
 
-    def eliminar_paciente(self, id_paciente):
+    def eliminar_paciente(self, id):
         """
         Elimina un paciente de la colección.
 
         - Args:
-            * id_paciente (str): ID único del paciente a eliminar.
+            * id (int): ID único del paciente a eliminar.
 
         - Raise:
             * KeyError: Si no se encuentra un paciente con el ID dado.
         """
         try:
-            if id_paciente not in self.pacientes:
-                raise KeyError(f"No se encontró un paciente con ID {id_paciente}.")
-            del self.pacientes[id_paciente]
+            if id not in self.pacientes:
+                raise KeyError(f"No se encontró un paciente con ID {id}.")
+            del self.pacientes[id]
         except KeyError as e:
             print(e)
 
-    def obtener_paciente(self, id_paciente):
+    def obtener_paciente(self, id):
         """
         Obtiene un paciente de la colección.
 
         - Args:
-            * id_paciente (str): ID único del paciente a obtener.
+            * id (int): ID único del paciente a obtener.
 
         - Retorna:
             * Paciente: La instancia de la clase Paciente correspondiente al ID dado, o None si no se encuentra.
@@ -167,19 +161,18 @@ class GestionPacientes:
             * KeyError: Si no se encuentra un paciente con el ID dado.
         """
         try:
-            if id_paciente not in self.pacientes:
-                raise KeyError(f"No se encontró un paciente con ID {id_paciente}.")
-            return self.pacientes[id_paciente]
+            if id not in self.pacientes:
+                raise KeyError(f"No se encontró un paciente con ID {id}.")
+            return self.pacientes[id]
         except KeyError as e:
             print(e)
-            return None
 
-    def actualizar_paciente(self, id_paciente, nombre=None, fecha_nac=None, historial_enfermedades=None, medicamentos=None):
+    def actualizar_paciente(self, id, nombre=None, fecha_nac=None, historial_enfermedades=None, medicamentos=None):
         """
         Actualiza la información de un paciente en la colección.
 
         - Args:
-            * id_paciente (str): ID único del paciente a actualizar.
+            * id (int): ID único del paciente a actualizar.
             * nombre (str, opcional): Nuevo nombre del paciente.
             * fecha_nac (str, opcional): Nueva fecha de nacimiento del paciente en formato "YYYY-MM-DD".
             * historial_enfermedades (list, opcional): Nuevo historial de enfermedades del paciente.
@@ -189,17 +182,17 @@ class GestionPacientes:
             * KeyError: Si no se encuentra un paciente con el ID dado.
         """
         try:
-            if id_paciente not in self.pacientes:
-                raise KeyError(f"No se encontró un paciente con ID {id_paciente}.")
-            paciente = self.pacientes[id_paciente]
-            if nombre:
+            if id not in self.pacientes:
+                raise KeyError(f"No se encontró un paciente con ID {id}.")
+            paciente = self.pacientes[id]
+            if nombre is not None:
                 paciente.nombre = nombre
-            if fecha_nac:
+            if fecha_nac is not None:
                 paciente.fecha_nac = datetime.strptime(fecha_nac, "%Y-%m-%d")
                 paciente.edad = paciente.calcular_edad()
-            if historial_enfermedades:
+            if historial_enfermedades is not None:
                 paciente.historial_enfermedades = historial_enfermedades
-            if medicamentos:
+            if medicamentos is not None:
                 paciente.medicamentos = medicamentos
         except KeyError as e:
             print(e)
@@ -216,19 +209,20 @@ class GestionPacientes:
             resultado.append(f"Id paciente: {id_paciente}\n {paciente}")
         return "\n".join(resultado)
 
+
 if __name__ == "__main__":
     # Crear pacientes
-    paciente1 = Paciente("Juan", "1990-01-01", ["Gripe", "Fiebre"], ["Paracetamol", "Ibuprofeno"])
-    paciente2 = Paciente("Ana", "1985-05-10", ["Covid-19", "Asma"], ["Remdesivir", "Salbutamol"])
-    paciente3 = Paciente("Luis", "1975-03-22", ["Diabetes", "Hipertensión"], ["Insulina", "Lisinopril"])
-    paciente4 = Paciente("Maria", "2000-07-15", ["Alergia", "Migraña"], ["Loratadina", "Sumatriptán"])
+    paciente1 = Paciente(1,"Juan", "1990-01-01", ["Gripe", "Fiebre"], ["Paracetamol", "Ibuprofeno"])
+    paciente2 = Paciente(2,"Ana", "1985-05-10", ["Covid-19", "Asma"], ["Remdesivir", "Salbutamol"])
+    paciente3 = Paciente(3,"Luis", "1975-03-22", ["Diabetes", "Hipertensión"], ["Insulina", "Lisinopril"])
+    paciente4 = Paciente(4,"Maria", "2000-07-15", ["Alergia", "Migraña"], ["Loratadina", "Sumatriptán"])
 
     # Crear una colección de pacientes
     gestion_pacientes = GestionPacientes()
-    gestion_pacientes.agregar_paciente(1, paciente1)
-    gestion_pacientes.agregar_paciente(2, paciente2)
-    gestion_pacientes.agregar_paciente(3, paciente3)
-    gestion_pacientes.agregar_paciente(4, paciente4)
+    gestion_pacientes.agregar_paciente(paciente1)
+    gestion_pacientes.agregar_paciente(paciente2)
+    gestion_pacientes.agregar_paciente(paciente3)
+    gestion_pacientes.agregar_paciente(paciente4)
 
     # Mostrar la colección de pacientes
     print("Colección de pacientes:")
@@ -262,4 +256,3 @@ if __name__ == "__main__":
     print("\nBuscar 'Migraña' en el historial del paciente con ID 4:")
     encontrado = gestion_pacientes.obtener_paciente(4).buscar_en_historial("Migraña")
     print(f"¿Se encontró 'Migraña'? {'Sí' if encontrado else 'No'}")
-
