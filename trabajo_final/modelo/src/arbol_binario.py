@@ -1,25 +1,22 @@
 # src/arbol_binario.py
 from paciente import Paciente, GestionPacientes
 
-class Nodo:
+class NodoArbol:
     """
     Clase que representa un nodo en un árbol binario de búsqueda.
 
     Atributos:
-        id_paciente (int): Identificador del paciente.
         paciente (Paciente): Objeto de la clase Paciente.
         izquierda (Nodo): Nodo hijo izquierdo.
         derecha (Nodo): Nodo hijo derecho.
     """
-    def __init__(self, id_paciente, paciente):
+    def __init__(self, paciente):
         """
         Inicializa un nodo con el identificador del paciente y el objeto paciente.
 
         Args:
-            id_paciente (int): Identificador del paciente.
             paciente (Paciente): Objeto de la clase Paciente.
         """
-        self.id_paciente = id_paciente
         self.paciente = paciente
         self.izquierda = None
         self.derecha = None
@@ -37,106 +34,100 @@ class ArbolBinarioBusqueda:
         """
         self.raiz = None
 
-    def insertar(self, id_paciente, paciente):
+    def insertar(self, paciente):
         """
         Inserta un nuevo nodo en el árbol binario de búsqueda.
 
         Args:
-            id_paciente (int): Identificador del paciente.
             paciente (Paciente): Objeto de la clase Paciente.
         """
         if self.raiz is None:
-            self.raiz = Nodo(id_paciente, paciente)
+            self.raiz = NodoArbol(paciente)
         else:
-            self._insertar_recursivo(self.raiz, id_paciente, paciente)
+            self._insertar_recursivo(self.raiz, paciente)
 
-    def _insertar_recursivo(self, nodo, id_paciente, paciente):
+    def _insertar_recursivo(self, nodo, paciente):
         """
         Inserta un nuevo nodo en el árbol binario de búsqueda de manera recursiva.
 
         Args:
             nodo (Nodo): Nodo actual en el que se está realizando la inserción.
-            id_paciente (int): Identificador del paciente.
             paciente (Paciente): Objeto de la clase Paciente.
         """
-        if id_paciente < nodo.id_paciente:
+        if paciente.id < nodo.paciente.id:
             if nodo.izquierda is None:
-                nodo.izquierda = Nodo(id_paciente, paciente)
+                nodo.izquierda = NodoArbol(paciente)
             else:
-                self._insertar_recursivo(nodo.izquierda, id_paciente, paciente)
+                self._insertar_recursivo(nodo.izquierda, paciente)
         else:
             if nodo.derecha is None:
-                nodo.derecha = Nodo(id_paciente, paciente)
+                nodo.derecha = NodoArbol(paciente)
             else:
-                self._insertar_recursivo(nodo.derecha, id_paciente, paciente)
+                self._insertar_recursivo(nodo.derecha, paciente)
 
-    def buscar(self, id_paciente):
+    def buscar(self, id):
         """
         Busca un nodo en el árbol binario de búsqueda por el identificador del paciente.
 
         Args:
-            id_paciente (int): Identificador del paciente.
+            id (int): Identificador del paciente.
 
         Returns:
             Paciente: Objeto de la clase Paciente que contiene el identificador del paciente, o None si no se encuentra.
         """
-        return self._buscar_recursivo(self.raiz, id_paciente)
+        return self._buscar_recursivo(self.raiz, id)
 
-    def _buscar_recursivo(self, nodo, id_paciente):
+    def _buscar_recursivo(self, nodo, id):
         """
         Busca un nodo en el árbol binario de búsqueda de manera recursiva.
 
         Args:
             nodo (Nodo): Nodo actual en el que se está realizando la búsqueda.
-            id_paciente (int): Identificador del paciente.
+            id (int): Identificador del paciente.
 
         Returns:
             Paciente: Objeto de la clase Paciente que contiene el identificador del paciente, o None si no se encuentra.
         """
-        if nodo is None:
-            return None
-        if id_paciente == nodo.id_paciente:
-            return nodo.paciente
-        elif id_paciente < nodo.id_paciente:
-            return self._buscar_recursivo(nodo.izquierda, id_paciente)
-        else:
-            return self._buscar_recursivo(nodo.derecha, id_paciente)
+        if nodo is None or nodo.paciente.id == id:
+            return nodo
+        if id < nodo.paciente.id:
+            return self._buscar_recursivo(nodo.izquierda, id)
+        return self._buscar_recursivo(nodo.derecha, id)
 
-    def eliminar(self, id_paciente):
+    def eliminar(self, id):
         """
         Elimina un nodo del árbol binario de búsqueda por el identificador del paciente.
 
         Args:
-            id_paciente (int): Identificador del paciente.
+            id (int): Identificador del paciente.
         """
-        self.raiz = self._eliminar_recursivo(self.raiz, id_paciente)
+        self.raiz = self._eliminar_recursivo(self.raiz, id)
 
-    def _eliminar_recursivo(self, nodo, id_paciente):
+    def _eliminar_recursivo(self, nodo, id):
         """
         Elimina un nodo del árbol binario de búsqueda de manera recursiva.
 
         Args:
             nodo (Nodo): Nodo actual en el que se está realizando la eliminación.
-            id_paciente (int): Identificador del paciente.
+            id (int): Identificador del paciente.
 
         Returns:
             Nodo: Nodo actualizado después de la eliminación.
         """
         if nodo is None:
             return nodo
-        if id_paciente < nodo.id_paciente:
-            nodo.izquierda = self._eliminar_recursivo(nodo.izquierda, id_paciente)
-        elif id_paciente > nodo.id_paciente:
-            nodo.derecha = self._eliminar_recursivo(nodo.derecha, id_paciente)
+        if id < nodo.paciente.id:
+            nodo.izquierda = self._eliminar_recursivo(nodo.izquierda, id)
+        elif id > nodo.paciente.id:
+            nodo.derecha = self._eliminar_recursivo(nodo.derecha, id)
         else:
             if nodo.izquierda is None:
                 return nodo.derecha
             elif nodo.derecha is None:
                 return nodo.izquierda
             temp = self._minimo_valor_nodo(nodo.derecha)
-            nodo.id_paciente = temp.id_paciente
             nodo.paciente = temp.paciente
-            nodo.derecha = self._eliminar_recursivo(nodo.derecha, temp.id_paciente)
+            nodo.derecha = self._eliminar_recursivo(nodo.derecha, temp.paciente.id)
         return nodo
 
     def _minimo_valor_nodo(self, nodo):
@@ -181,17 +172,17 @@ class ArbolBinarioBusqueda:
     
 def main():
     # Crear pacientes
-    paciente1 = Paciente("Juan Pérez", "1990-01-01", ["Gripe", "Fiebre"], ["Paracetamol", "Ibuprofeno"])
-    paciente2 = Paciente("Ana López", "1985-05-10", ["Covid-19", "Asma"], ["Remdesivir", "Salbutamol"])
-    paciente3 = Paciente("Luis García", "1975-03-22", ["Diabetes", "Hipertensión"], ["Insulina", "Lisinopril"])
-    paciente4 = Paciente("María Fernández", "2000-07-15", ["Alergia", "Migraña"], ["Loratadina", "Sumatriptán"])
+    paciente1 = Paciente(1, "Juan Pérez", "1990-01-01", ["Gripe", "Fiebre"], ["Paracetamol", "Ibuprofeno"])
+    paciente2 = Paciente(2, "Ana López", "1985-05-10", ["Covid-19", "Asma"], ["Remdesivir", "Salbutamol"])
+    paciente3 = Paciente(3, "Luis García", "1975-03-22", ["Diabetes", "Hipertensión"], ["Insulina", "Lisinopril"])
+    paciente4 = Paciente(4, "María Fernández", "2000-07-15", ["Alergia", "Migraña"], ["Loratadina", "Sumatriptán"])
 
     # Crear una colección de pacientes usando GestionPacientes
     gestion_pacientes = GestionPacientes()
-    gestion_pacientes.agregar_paciente(1, paciente1)
-    gestion_pacientes.agregar_paciente(2, paciente2)
-    gestion_pacientes.agregar_paciente(3, paciente3)
-    gestion_pacientes.agregar_paciente(4, paciente4)
+    gestion_pacientes.agregar_paciente(paciente1)
+    gestion_pacientes.agregar_paciente(paciente2)
+    gestion_pacientes.agregar_paciente(paciente3)
+    gestion_pacientes.agregar_paciente(paciente4)
 
     # Crear un árbol binario de búsqueda
     arbol = ArbolBinarioBusqueda()
