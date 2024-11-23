@@ -84,9 +84,9 @@ La clase GestionPacientes utiliza un diccionario para almacenar los pacientes, l
 
 
 
-# !TODO: Revisar Operaciones con pacientes -> Buscar por DNI retorna 'None'
+# (HECHO): Revisar Operaciones con pacientes -> Buscar por DNI retorna 'None'
 
-# !TODO: Revisar Gestion de Pacientes --> Elimar paciente no funciona correctamente
+# (HECHO): Revisar Gestion de Pacientes --> Elimar paciente no funciona correctamente
 
 # !TODO: Reviar Arbol General y Cola de Prioridad en menu principal
 
@@ -98,15 +98,15 @@ La clase GestionPacientes utiliza un diccionario para almacenar los pacientes, l
 
 1- Gestion de Pacientes
   - 1 Agregar Paciente (check)
-    # TODO: Levantar errores de ingreso de fecha de nacimiento.
+    # (HECHO): Levantar errores de ingreso de fecha de nacimiento. 
   - 2 Eliminar Paciente (a revisar)
-    # TODO: Agregar mensaje de eliminacion de paciente
+    # (HECHO): Agregar mensaje de eliminacion de paciente
   - 3 Obtener información de un paciente:
     - 3.1 Buscar por DNI (check)  
-    # TODO: Verificar que los datos ingresados sean del tipo correcto.
-    # TODO: Verificar porque retorna None cuando dni no existe.
+    # (HECHO): Verificar que los datos ingresados sean del tipo correcto.
+    # (HECHO): Verificar porque retorna None cuando dni no existe.
     - 4 Actualizar información de un paciente
-    # !TODO: - Revisar y corregir la actualización de enfermedades y medicamentos en la clase Paciente, para añadir nuevos sin eliminar lo anterior. (metodo extend())
+    # (HECHO): - Revisar y corregir la actualización de enfermedades y medicamentos en la clase Paciente, para añadir nuevos sin eliminar lo anterior. (metodo extend())
 
     # TODO: Cola de prioridades y manejo de arbol general en menu. (
         - Urgencias médicas (Cola de prioridad)
@@ -121,25 +121,25 @@ La clase GestionPacientes utiliza un diccionario para almacenar los pacientes, l
     )
 
 2- Operaciones con Pacientes
-    - 1 Registrar un nuevo paciente
-    # TODO: Imprimir mensaje de confirmacion de registro (no figura paciente en clase Paciente)
+  - 1 Registrar un nuevo paciente
+  # (HECHO) : Imprimir mensaje de confirmacion de registro (no figura paciente en clase Paciente)
     2- Buscar paciente por DNI
-    # TODO: NO se imprime el paciente registrado(__str__) y tampoco se imprime mensaje de no encontrado.
+    # (HECHO): NO se imprime el paciente registrado(__str__) y tampoco se imprime mensaje de no encontrado.
     3 - Eliminar paciente por DNI
-    # TODO: NO se imprime mensaje de eliminacion de paciente
+    # (HECHO): NO se imprime mensaje de eliminacion de paciente
 
 3- Gestion Hospitales
     1- Agregar Hospital
-    # TODO: Mejorar con un ciclo while la carga de hospitales? (Para mi no (DSG))
-    2- Agregar una conexion entre hospitales
-    # TODO: cambiar peso por distancia.
+  # TODO: Mejorar con un ciclo while la carga de hospitales? (Para mi no (DSG))
+  2- Agregar una conexion entre hospitales
+  # TODO: cambiar peso por distancia.
      garrahan -> elizalde (10)
      garrahan -> durand (100) (RUTA NO ENCONTRADA)
      fernandez -> pirovano (50)
      garrahan ->fernandez (20)
      garrahan -> pirovano (30)
-    3 - Buscar una ruta entre dos hospitales
-    # TODO: Devuelve lo mismo que opcion 4
-    5 - Calcular la distancia entre dos hospitales
-    # TODO: No debe imprimir distancia 0 (hospital inicio -> hospital inicio)
-    # TODO: evitar impresión de infinito cuando no hay conexion entre hospitales.
+  3 - Buscar una ruta entre dos hospitales
+  # TODO: Devuelve lo mismo que opcion 4
+  # TODO: No debe imprimir distancia 0 (hospital inicio -> hospital inicio)
+  # TODO: evitar impresión de infinito cuando no hay conexion entre hospitales.
+  5 - Calcular la distancia entre dos hospitales
