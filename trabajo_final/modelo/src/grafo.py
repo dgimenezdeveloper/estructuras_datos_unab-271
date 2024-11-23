@@ -65,13 +65,6 @@ class Grafo:
         for hospital, distancia in distancias.items():
             print(f"Distancia desde {inicio} a {hospital}: {distancia}")
     
-    def _dfs_topologico(self, vertice, visitados, orden):
-        visitados.add(vertice)
-        for vecino, _ in self.vertices[vertice]:
-            if vecino not in visitados:
-                self._dfs_topologico(vecino, visitados, orden)
-        orden.append(vertice)
-
     def ordenamiento_topologico(self):
         visitados = set()
         orden = []
@@ -80,3 +73,10 @@ class Grafo:
                 self._dfs_topologico(vertice, visitados, orden)
         orden.reverse()
         return orden
+    
+    def _dfs_topologico(self, vertice, visitados, orden):
+        visitados.add(vertice)
+        for vecino, _ in self.vertices[vertice]:
+            if vecino not in visitados:
+                self._dfs_topologico(vecino, visitados, orden)
+        orden.append(vertice)
