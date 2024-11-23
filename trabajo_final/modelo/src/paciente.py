@@ -11,10 +11,9 @@ class Paciente:
         Inicializa una nueva instancia de la clase Paciente.
 
         - Args:
-            * Id (int): Identificador único del paciente.
-            * nombre (str): Nombre del paciente .
+            * id (int): Identificador único del paciente.
+            * nombre (str): Nombre del paciente.
             * fecha_nac (str): Fecha de nacimiento del paciente en formato "YYYY-MM-DD".
-            * edad (int): Edad del paciente.
             * historial_enfermedades (list, opcional): Lista de enfermedades del paciente. Por defecto es una lista vacía.
             * medicamentos (list, opcional): Lista de medicamentos del paciente. Por defecto es una lista vacía.
         """
@@ -40,54 +39,51 @@ class Paciente:
 
     def buscar_en_historial(self, clave):
         """
-        Función recursiva para buscar una enfermedad o medicamento clave en el historial de tratamientos de un paciente.
-        - Args
+        Busca una enfermedad o medicamento clave en el historial de tratamientos de un paciente.
+
+        - Args:
             * clave (str): Enfermedad o medicamento clave a buscar.
-            
-        :return: True si se encuentra la clave, False en caso contrario.
+
+        Retorna:
+            * (bool): True si se encuentra la clave, False en caso contrario.
         """
-        try:
-            return self._buscar_en_historial_recursivo(self.historial_enfermedades + self.medicamentos, clave)
-        except Exception as e:
-            print(f"Error al buscar en el historial: {e}")
-            return False
+        return self._buscar_en_historial_recursivo(self.historial_enfermedades + self.medicamentos, clave)
 
     def _buscar_en_historial_recursivo(self, historial, clave):
         """
         Función auxiliar recursiva para buscar una enfermedad o medicamento clave en el historial.
-        . Args
+
+        - Args:
             * historial (list): Lista de enfermedades y medicamentos del paciente.
             * clave (str): Enfermedad o medicamento clave a buscar.
-            
-        :return: True si se encuentra la clave, False en caso contrario.
+
+        Retorna:
+            * (bool): True si se encuentra la clave, False en caso contrario.
         """
-        try:
-            # Caso base: si el historial está vacío, no se encontró la clave
-            if not historial:
-                return False
-            
-            # Verificar si la clave está en el tratamiento actual
-            tratamiento_actual = historial[0]
-            if tratamiento_actual == clave:
-                return True
-            
-            # Llamada recursiva con el resto del historial
-            return self._buscar_en_historial_recursivo(historial[1:], clave)
-        except Exception as e:
-            print(f"Error en la búsqueda recursiva: {e}")
+        # Caso base: si el historial está vacío, no se encontró la clave
+        if not historial:
             return False
+        
+        # Verificar si la clave está en el tratamiento actual
+        tratamiento_actual = historial[0]
+        if tratamiento_actual == clave:
+            return True
+        
+        # Llamada recursiva con el resto del historial
+        return self._buscar_en_historial_recursivo(historial[1:], clave)
 
     def __lt__(self, otro):
         """
-        Compara dos objetos Paciente basándose en su ID.
+        Compara dos pacientes por su ID.
 
         - Args:
-            * otro (Paciente): Otro objeto Paciente a comparar.
+            * otro (Paciente): Otro paciente a comparar.
 
-        - Retorna:
-            * (bool): True si el ID del paciente es menor que el ID del otro paciente, False en caso contrario.
+        Retorna:
+            * (bool): True si el ID del paciente actual es menor que el ID del otro paciente, False en caso contrario.
         """
         return self.id < otro.id
+
     
     def __str__(self):
         """
@@ -123,12 +119,10 @@ class GestionPacientes:
         - Raises:
             * ValueError: Si el paciente con el ID dado ya existe.
         """
-        try:
-            if paciente.id in self.pacientes:
-                raise ValueError(f"El paciente con ID {paciente.id} ya existe.")
-            self.pacientes[paciente.id] = paciente
-        except ValueError as e:
-            print(e)
+        if paciente.id in self.pacientes:
+            return False
+        self.pacientes[paciente.id] = paciente
+        return True
 
     def eliminar_paciente(self, id):
         """
@@ -140,12 +134,10 @@ class GestionPacientes:
         - Raise:
             * KeyError: Si no se encuentra un paciente con el ID dado.
         """
-        try:
-            if id not in self.pacientes:
-                raise KeyError(f"No se encontró un paciente con ID {id}.")
+        if id in self.pacientes:
             del self.pacientes[id]
-        except KeyError as e:
-            print(e)
+            return True
+        return False
 
     def obtener_paciente(self, id):
         """
@@ -160,12 +152,7 @@ class GestionPacientes:
         - Raise:
             * KeyError: Si no se encuentra un paciente con el ID dado.
         """
-        try:
-            if id not in self.pacientes:
-                raise KeyError(f"No se encontró un paciente con ID {id}.")
-            return self.pacientes[id]
-        except KeyError as e:
-            print(e)
+        return self.pacientes.get(id)
 
     def actualizar_paciente(self, id, nombre=None, fecha_nac=None, historial_enfermedades=None, medicamentos=None):
         """
@@ -181,21 +168,19 @@ class GestionPacientes:
         - Raise:
             * KeyError: Si no se encuentra un paciente con el ID dado.
         """
-        try:
-            if id not in self.pacientes:
-                raise KeyError(f"No se encontró un paciente con ID {id}.")
-            paciente = self.pacientes[id]
-            if nombre is not None:
+        paciente = self.obtener_paciente(id)
+        if paciente:
+            if nombre:
                 paciente.nombre = nombre
-            if fecha_nac is not None:
+            if fecha_nac:
                 paciente.fecha_nac = datetime.strptime(fecha_nac, "%Y-%m-%d")
                 paciente.edad = paciente.calcular_edad()
-            if historial_enfermedades is not None:
-                paciente.historial_enfermedades = historial_enfermedades
-            if medicamentos is not None:
-                paciente.medicamentos = medicamentos
-        except KeyError as e:
-            print(e)
+            if historial_enfermedades:
+                paciente.historial_enfermedades.extend(historial_enfermedades)
+            if medicamentos:
+                paciente.medicamentos.extend(medicamentos)
+            return True
+        return False
     
     def __str__(self):
         """
