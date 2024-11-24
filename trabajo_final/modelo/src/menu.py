@@ -1,5 +1,5 @@
 # src/menu.py
-
+import os
 from sistema_gestion_pacientes import SistemaGestionPacientes
 from paciente import Paciente
 from arbol_general import ArbolGeneral
@@ -23,19 +23,25 @@ def menu_principal():
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
+            os.system('clear')
             menu_gestion_pacientes(sistema_gestion)
         elif opcion == "2":
+            os.system('clear')
             menu_operaciones_pacientes(sistema_gestion)
         elif opcion == "3":
+            os.system('clear')
             menu_gestion_hospitales(grafo)
         elif opcion == "4":
+            os.system('clear')
             print("Saliendo del programa...")
         else:
+            os.system('clear')
             print("Opción no válida. Intente de nuevo.")
 
 def menu_gestion_pacientes(sistema_gestion):
     opcion = None
     while opcion != "5":
+        os.system('clear')
         print("\nGestión de Pacientes")
         print("1. Agregar un nuevo paciente")
         print("2. Eliminar un paciente existente")
@@ -45,6 +51,7 @@ def menu_gestion_pacientes(sistema_gestion):
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
+            os.system('clear')
             id = solicitar_dni()
             nombre = solicitar_nombre()
             fecha_nac = solicitar_fecha_nacimiento()
@@ -56,12 +63,14 @@ def menu_gestion_pacientes(sistema_gestion):
             else:
                 print("Error: El paciente con ese ID ya existe.")
         elif opcion == "2":
+            os.system('clear')
             id = solicitar_dni()
             if sistema_gestion.eliminar_paciente(id):
                 print("Paciente eliminado exitosamente.")
             else:
                 print("Paciente no encontrado.")
         elif opcion == "3":
+            os.system('clear')
             id = solicitar_dni()
             paciente = sistema_gestion.obtener_paciente(id)
             if paciente:
@@ -69,6 +78,7 @@ def menu_gestion_pacientes(sistema_gestion):
             else:
                 print("Paciente no encontrado.")
         elif opcion == "4":
+            os.system('clear')
             id = solicitar_dni()
             nombre = input("Nuevo Nombre (dejar en blanco para no cambiar): ")
             fecha_nac = input("Nueva Fecha de Nacimiento (YYYY-MM-DD) (dejar en blanco para no cambiar): ")
@@ -81,8 +91,10 @@ def menu_gestion_pacientes(sistema_gestion):
             else:
                 print("Paciente no encontrado.")
         elif opcion == "5":
+            os.system('clear')
             print("Volviendo al Menú Principal...")
         else:
+            os.system('clear')
             print("Opción no válida. Intente de nuevo.")
 
 def menu_operaciones_pacientes(sistema_gestion):
@@ -96,6 +108,7 @@ def menu_operaciones_pacientes(sistema_gestion):
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
+            os.system('clear')
             id = solicitar_dni()
             nombre = solicitar_nombre()
             fecha_nac = solicitar_fecha_nacimiento()
@@ -107,6 +120,7 @@ def menu_operaciones_pacientes(sistema_gestion):
             else:
                 print("Error: El paciente con ese ID ya existe.")
         elif opcion == "2":
+            os.system('clear')
             id = solicitar_dni()
             paciente = sistema_gestion.obtener_paciente(id)
             if paciente:
@@ -114,14 +128,17 @@ def menu_operaciones_pacientes(sistema_gestion):
             else:
                 print("Paciente no encontrado.")
         elif opcion == "3":
+            os.system('clear')
             id = solicitar_dni()
             if sistema_gestion.eliminar_paciente(id):
                 print("Paciente eliminado exitosamente.")
             else:
                 print("Paciente no encontrado.")
         elif opcion == "4":
+            os.system('clear')
             print("Volviendo al Menú Principal...")
         else:
+            os.system('clear')
             print("Opción no válida. Intente de nuevo.")
 
 def menu_gestion_hospitales(grafo):
@@ -137,27 +154,34 @@ def menu_gestion_hospitales(grafo):
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
+            os.system('clear')
             hospital = input("Nombre del hospital: ")
             grafo.agregar_vertice(hospital)
         elif opcion == "2":
+            os.system('clear')
             hospital1 = input("Nombre del primer hospital: ")
             hospital2 = input("Nombre del segundo hospital: ")
             peso = int(input("Peso de la conexión: "))
             grafo.agregar_arista(hospital1, hospital2, peso)
         elif opcion == "3":
+            os.system('clear')
             inicio = input("Hospital de inicio: ")
             objetivo = input("Hospital objetivo: ")
             ruta = grafo.dfs(inicio, objetivo)
             print(f"Ruta encontrada: {ruta}")
         elif opcion == "4":
+            os.system('clear')
             inicio = input("Hospital de inicio: ")
             objetivo = input("Hospital objetivo: ")
             ruta = grafo.bfs(inicio, objetivo)
             print(f"Ruta encontrada: {ruta}")
         elif opcion == "5":
+            os.system('clear')
             inicio = input("Hospital de inicio: ")
             grafo.imprimir_dijkstra(inicio)
         elif opcion == "6":
+            os.system('clear')
             print("Volviendo al Menú Principal...")
         else:
+            os.system('clear')
             print("Opción no válida. Intente de nuevo.")
