@@ -90,7 +90,7 @@ La clase GestionPacientes utiliza un diccionario para almacenar los pacientes, l
 
 # !TODO: Reviar Arbol General y Cola de Prioridad en menu principal
 
-# TODO: se guardan datos en estructuras distintas, no se tienen acceso a ellos. (Paciente <-> Arbol Binario)
+# (HECHO): se guardan datos en estructuras distintas, no se tienen acceso a ellos. (Paciente <-> Arbol Binario)
 
 
 
@@ -114,13 +114,12 @@ La clase GestionPacientes utiliza un diccionario para almacenar los pacientes, l
         - Pacientes atendidos (Arbol General)
         - Pacientes fallecidos (Arbol General) (SOLO SI LLEGAMOS A TIEMPO)
     )
-    # TODO: Ordenamiento topologico (sintomas, diagnosticos) (
+    # (HECHO): Ordenamiento topologico (sintomas, diagnosticos) (
         - Sintomas
         - Diagnosticos
-        - Medicamentos
     )
 
-2- Operaciones con Pacientes
+# 2- Operaciones con Pacientes
   - 1 Registrar un nuevo paciente
   # (HECHO) : Imprimir mensaje de confirmacion de registro (no figura paciente en clase Paciente)
     2- Buscar paciente por DNI
