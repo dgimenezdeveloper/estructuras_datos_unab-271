@@ -6,15 +6,20 @@ class Grafo:
         self.vertices = {}
 
     def agregar_vertice(self, vertice):
+        vertice = vertice.lower()
         if vertice not in self.vertices:
             self.vertices[vertice] = []
 
     def agregar_arista(self, vertice1, vertice2, peso=1):
+        vertice1 = vertice1.lower()
+        vertice2 = vertice2.lower()
         if vertice1 in self.vertices and vertice2 in self.vertices:
             self.vertices[vertice1].append((vertice2, peso))
             self.vertices[vertice2].append((vertice1, peso))
 
     def dfs(self, inicio, objetivo, visitados=None):
+        inicio = inicio.lower()
+        objetivo = objetivo.lower()
         if visitados is None:
             visitados = set()
         visitados.add(inicio)
@@ -28,6 +33,8 @@ class Grafo:
         return None
 
     def bfs(self, inicio, objetivo):
+        inicio = inicio.lower()
+        objetivo = objetivo.lower()
         visitados = set()
         cola = [(inicio, [inicio])]
         while cola:
@@ -41,7 +48,14 @@ class Grafo:
                         cola.append((vecino, camino + [vecino]))
         return None
 
+    def cargar_datos(self, vertices, aristas):
+        for vertice in vertices:
+            self.agregar_vertice(vertice)
+        for desde, hacia in aristas:
+            self.agregar_arista(desde, hacia)
+    
     def dijkstra(self, inicio):
+        inicio = inicio.lower()
         distancias = {vertice: float('infinity') for vertice in self.vertices}
         distancias[inicio] = 0
         cola_prioridad = ColaPrioridades()
@@ -63,7 +77,8 @@ class Grafo:
     def imprimir_dijkstra(self, inicio):
         distancias = self.dijkstra(inicio)
         for hospital, distancia in distancias.items():
-            print(f"Distancia desde {inicio} a {hospital}: {distancia}")
+            if hospital != inicio and distancia != float('infinity'):
+                print(f"Distancia desde {inicio} a {hospital}: {distancia}")
     
     def ordenamiento_topologico(self):
         visitados = set()
